@@ -4,7 +4,8 @@ Priority: optional
 Maintainer: Masatoshi SANO <snmsts@gmail.com>
 Build-Depends: debhelper (>= 11), bash-completion
 Standards-Version: 3.9.5
-Homepage: https://github.com/roswell/roswell
+Homepage: https://roswell.github.io/
+Vcs-Browser: https://github.com/roswell/roswell
 Vcs-Git: https://github.com/roswell/roswell.git
 
 Package: roswell
