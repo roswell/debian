@@ -11,7 +11,7 @@ prepare: \
 	$(PACKAGE)-$(VERSION)/debian/copyright \
 	$(PACKAGE)-$(VERSION)/debian/compat
 
-$(PACKAGE)-$(VERSION)/debian/changelog: $(PACKAGE)-$(VERSION)/ChangeLog
+$(PACKAGE)-$(VERSION)/debian/changelog: changelog $(PACKAGE)-$(VERSION)/ChangeLog
 	cp $< $@
 $(PACKAGE)-$(VERSION)/debian/copyright: copyright $(PACKAGE)-$(VERSION)/ChangeLog
 	cp $< $@
@@ -33,5 +33,7 @@ $(PACKAGE)-$(VERSION)/ChangeLog: $(PACKAGE)_$(VERSION).orig.tar.gz
 	mkdir -p $(PACKAGE)-$(VERSION)/debian
 	sed -i -e 's/run-prove/echo/g' $(PACKAGE)-$(VERSION)/Makefile.am
 
+lint:
+	lintian -EviIL +pedantic $(PACKAGE)_$(VERSION)-*.changes|less
 clean:
 	rm -rf $(PACKAGE)*
