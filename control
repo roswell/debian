@@ -3,7 +3,7 @@ Section: lisp
 Priority: optional
 Maintainer: Masatoshi SANO <snmsts@gmail.com>
 Build-Depends: debhelper (>= 11), bash-completion
-Standards-Version: 4.1.4
+Standards-Version: 4.6.0.1
 Homepage: https://roswell.github.io/
 Vcs-Browser: https://github.com/roswell/roswell
 Vcs-Git: https://github.com/roswell/roswell.git

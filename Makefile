@@ -9,7 +9,8 @@ prepare: \
 	$(PACKAGE)-$(VERSION)/debian/rules \
 	$(PACKAGE)-$(VERSION)/debian/control \
 	$(PACKAGE)-$(VERSION)/debian/copyright \
-	$(PACKAGE)-$(VERSION)/debian/compat
+	$(PACKAGE)-$(VERSION)/debian/compat \
+	$(PACKAGE)-$(VERSION)/debian/README.source
 
 $(PACKAGE)-$(VERSION)/debian/changelog: changelog $(PACKAGE)-$(VERSION)/ChangeLog
 	cp $< $@
@@ -21,12 +22,14 @@ $(PACKAGE)-$(VERSION)/debian/rules: rules $(PACKAGE)-$(VERSION)/ChangeLog
 	cp $< $@
 $(PACKAGE)-$(VERSION)/debian/compat: compat $(PACKAGE)-$(VERSION)/ChangeLog
 	cp $< $@
+$(PACKAGE)-$(VERSION)/debian/README.source: $(PACKAGE)-$(VERSION)/README.md
+	cp $< $@
 
 $(PACKAGE)_$(VERSION).orig.tar.gz:
 	curl --no-progress-bar --retry 10 -o $@ \
 	-L https://github.com/roswell/roswell/archive/refs/tags/v$(VERSION).tar.gz
 
-$(PACKAGE)-$(VERSION)/ChangeLog: $(PACKAGE)_$(VERSION).orig.tar.gz
+$(PACKAGE)-$(VERSION)/README.md $(PACKAGE)-$(VERSION)/ChangeLog: $(PACKAGE)_$(VERSION).orig.tar.gz
 	tar xf $<
 	rm -rf $(PACKAGE)-$(VERSION)/debian # start from scratch
 	find $(PACKAGE)-$(VERSION) -type f -exec touch {} +
